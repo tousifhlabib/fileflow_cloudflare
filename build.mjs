@@ -38,7 +38,7 @@ for (const file of pages) {
   await cp(join(root, file), join(output, file));
 }
 
-for (const file of ["robots.txt", "sitemap.xml"]) {
+await cp(join(root, "google595fed6a27c75de4.html"), join(output, "google595fed6a27c75de4.html"));  for (const file of ["robots.txt", "sitemap.xml"]) {
   const filePath = join(output, file);
   const content = await readFile(filePath, "utf8");
   await writeFile(
