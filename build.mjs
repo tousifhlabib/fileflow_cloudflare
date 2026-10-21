@@ -3,7 +3,7 @@ import { join } from "node:path";
 
 const root = process.cwd();
 const output = join(root, "dist");
-const siteUrl = new URL(process.env.SITE_URL || "https://fileflow-cloudflare.pages.dev");
+const siteUrl = new URL(process.env.SITE_URL || "https://fileflow-tools.pages.dev");
 if (siteUrl.protocol !== "https:" || siteUrl.pathname !== "/" || siteUrl.search || siteUrl.hash) {
   throw new Error("SITE_URL must be an HTTPS origin, such as https://fileflow-delta.vercel.app.");
 }
@@ -41,7 +41,17 @@ for (const file of pages) {
 for (const file of ["robots.txt", "sitemap.xml"]) {
   const filePath = join(output, file);
   const content = await readFile(filePath, "utf8");
-  await writeFile(filePath, content.replaceAll("https://fileflow-delta.vercel.app", canonicalOrigin));
+  await writeFile(
+    filePath,
+    content
+      .replaceAll("https://fileflow-delta.vercel.app", canonicalOrigin)
+      .replaceAll("https://fileflow-cloudflare.pages.dev", canonicalOrigin)
+  );
+}
+
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim() || "";
+if (googleVerification && !/^[A-Za-z0-9_-]+$/.test(googleVerification)) {
+  throw new Error("GOOGLE_SITE_VERIFICATION must be the token from Google's HTML tag verification method.");
 }
 
 for (const file of pages.filter((name) => name.endsWith(".html"))) {
@@ -51,8 +61,31 @@ for (const file of pages.filter((name) => name.endsWith(".html"))) {
   if (!html.includes("</head>")) throw new Error(`Cannot add production metadata to ${file}: missing </head>.`);
   html = html.replaceAll('href="index.html"', 'href="/"');
   const pageUrl = file === "index.html" ? `${canonicalOrigin}/` : `${canonicalOrigin}/${file}`;
+  const title = html.match(/<title>(.*?)<\/title>/i)?.[1]?.trim();
+  const description = html.match(/<meta name="description" content="([^"]+)"/i)?.[1]?.trim();
+  if (!title || !description) {
+    throw new Error(`Cannot add search metadata to ${file}: title and meta description are required.`);
+  }
+  const metadata = [
+    `  <meta property="og:type" content="website">`,
+    `  <meta property="og:site_name" content="Fileflow">`,
+    `  <meta property="og:title" content="${title}">`,
+    `  <meta property="og:description" content="${description}">`,
+    `  <meta property="og:url" content="${pageUrl}">`,
+    `  <meta name="twitter:card" content="summary">`,
+    ...(googleVerification ? [`  <meta name="google-site-verification" content="${googleVerification}">`] : [])
+  ].join("\n");
   const canonicalLink = `  <link rel="canonical" href="${pageUrl}">\n`;
-  html = html.replace("</head>", `${canonicalLink}${adScripts}</head>`);
+  const structuredData = file === "index.html"
+    ? `  <script type="application/ld+json">${JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Fileflow",
+        url: `${canonicalOrigin}/`,
+        description
+      }).replaceAll("<", "\\u003c")}</script>\n`
+    : "";
+  html = html.replace("</head>", `${canonicalLink}${metadata}\n${structuredData}${adScripts}</head>`);
   await writeFile(pagePath, html);
 }
 
