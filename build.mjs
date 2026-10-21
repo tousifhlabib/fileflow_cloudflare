@@ -60,7 +60,9 @@ for (const file of pages.filter((name) => name.endsWith(".html"))) {
   const adScripts = '  <script src="adsense-config.js" defer></script>\n  <script src="ads.js" defer></script>\n';
   if (!html.includes("</head>")) throw new Error(`Cannot add production metadata to ${file}: missing </head>.`);
   html = html.replaceAll('href="index.html"', 'href="/"');
-  const pageUrl = file === "index.html" ? `${canonicalOrigin}/` : `${canonicalOrigin}/${file}`;
+  const pageUrl = file === "index.html"
+    ? `${canonicalOrigin}/`
+    : `${canonicalOrigin}/${file.replace(/\.html$/, "")}`;
   const title = html.match(/<title>(.*?)<\/title>/i)?.[1]?.trim();
   const description = html.match(/<meta name="description" content="([^"]+)"/i)?.[1]?.trim();
   if (!title || !description) {
