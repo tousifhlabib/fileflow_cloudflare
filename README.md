@@ -25,7 +25,17 @@ To preview the site locally, serve `dist/` over HTTP and configure the COOP/COEP
    - Build output directory: `dist`
    - Root directory: the repository root if this folder's contents are at the root; otherwise `fileflow_Cloudflare`.
 
-The default canonical URL is `https://fileflow-cloudflare.pages.dev` (use `fileflow-cloudflare` as the Pages project name). If Cloudflare assigns a different hostname or you use a custom domain, add a Pages environment variable named `SITE_URL` with the final HTTPS origin, for example `https://www.example.com`. The build uses it for canonical tags, `robots.txt`, and `sitemap.xml`.
+The default canonical URL is `https://fileflow-tools.pages.dev` (the current Pages project name). If Cloudflare assigns a different hostname or you use a custom domain, add a Pages environment variable named `SITE_URL` with the final HTTPS origin, for example `https://www.example.com`. The build uses it for canonical tags, Open Graph metadata, structured data, `robots.txt`, and `sitemap.xml`.
+
+### Google Search Console
+
+1. Add the URL-prefix property `https://fileflow-tools.pages.dev/` in [Google Search Console](https://search.google.com/search-console/).
+2. Choose the **HTML tag** verification method and copy only the `content` token from Google's provided tag.
+3. In Cloudflare Pages, open this project's **Settings → Environment variables** and add `GOOGLE_SITE_VERIFICATION` with that token for Production.
+4. Trigger a new deployment. The build adds Google's verification meta tag to each page's `<head>`.
+5. Return to Search Console and select **Verify**. Once verified, submit `https://fileflow-tools.pages.dev/sitemap.xml` in **Sitemaps**.
+
+Keep the verification token in the Cloudflare build environment; do not commit it to the repository. Search Console verification and indexing can take time and do not guarantee search ranking.
 
 The build copies `_headers` into `dist/`. Cloudflare Pages uses this file to set COOP/COEP for the multi-threaded FFmpeg converter, plus additional security headers. Verify these headers and test conversions on the deployed domain after deployment. `vercel.json` is not used by Cloudflare Pages.
 
