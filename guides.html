@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="description" content="Practical guides to image, audio, video, and document formats, including Fileflow's conversion limits and trade-offs.">
+  <title>File Conversion Guides — Fileflow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body data-page="guides">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Fileflow home"><span class="brand-mark">f</span><span>fileflow<span class="brand-dot">.</span></span></a>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span></button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html#tools">All tools</a><a href="image.html">Image</a><a href="audio.html">Audio</a><a href="video.html">Video</a><a href="document.html">Documents</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <a class="header-cta" href="index.html#tools">Choose a tool <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main>
+    <section class="category-hero container">
+      <a class="back-link" href="index.html">← Back to Fileflow</a>
+      <div class="category-hero-content">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> FORMAT FIELD NOTES</div>
+        <h1>Choose a format<br><span>with confidence.</span></h1>
+        <p>Practical notes on quality, compatibility, privacy, and what Fileflow's converters actually do.</p>
+      </div>
+      <div class="category-hero-icon document-hero-icon" aria-hidden="true">▤</div>
+    </section>
+    <section class="container detail-section legal-content guide-content">
+      <article id="images">
+        <div class="eyebrow">01 · IMAGES</div>
+        <h2>JPG, PNG, or WebP: what changes?</h2>
+        <p><strong>JPG</strong> uses lossy compression and is a common choice for photographs. Repeatedly saving a JPG as another JPG can reduce quality. JPG does not support transparency; transparent areas are filled with white by Fileflow when exporting JPG.</p>
+        <p><strong>PNG</strong> preserves image data without lossy compression and supports transparency, which suits logos, diagrams, and interface graphics. PNG files can be larger than JPG photos. <strong>WebP</strong> can offer smaller files for web use, but compatibility depends on the app or service that receives the image.</p>
+        <p>Fileflow converts PNG, JPG, WebP, GIF, and BMP inputs to PNG, JPG, or WebP in the browser. The image limit is 25 MB. Animated GIFs are converted from their first frame only, so the result is not animated. If an image is very large in pixel dimensions, your browser's available memory can matter even when the file is under the size limit.</p>
+        <p><a href="image.html">Open the image converter →</a></p>
+      </article>
+
+      <article id="audio">
+        <div class="eyebrow">02 · AUDIO</div>
+        <h2>MP3 or WAV: smaller file or easier editing?</h2>
+        <p><strong>MP3</strong> is compressed and usually much smaller, making it convenient for sharing and playback. The conversion is lossy, so it cannot restore detail that was absent from the source. Fileflow encodes MP3 at 128 kbps on the audio page and 192 kbps when extracting audio from video.</p>
+        <p><strong>WAV</strong> is an uncompressed audio container, useful for editing compatibility but often much larger. Fileflow's WAV output is 16-bit PCM from audio conversion; video audio extraction produces 44.1 kHz stereo PCM. File size grows with duration, sample rate, bit depth, and channel count.</p>
+        <p>Audio conversion decodes the file using browser audio support, so an unfamiliar codec may not open even if the filename looks supported. Audio inputs are limited to 100 MB and 30 minutes. Video-to-audio extraction is limited by the video converter's 100 MB and 10-minute limits, and requires an audio track in the video.</p>
+        <p><a href="audio.html">Open the audio converter →</a> · <a href="video.html">Extract audio from video →</a></p>
+      </article>
+
+      <article id="video">
+        <div class="eyebrow">03 · VIDEO</div>
+        <h2>What does "up to 1080p" mean?</h2>
+        <p>Fileflow converts supported MP4, MOV, WebM, MKV, or AVI sources to MP4 using H.264 video and AAC audio. Video is scaled to fit inside a 1920 × 1080 frame while preserving its aspect ratio. The converter does not upscale smaller sources, so a 720p input stays at its smaller dimensions rather than gaining detail from an artificial 1080p export.</p>
+        <p>Output quality and size depend on the source, content, and encoder settings. Re-encoding can change image quality and audio characteristics. Video conversion runs locally in a multi-threaded WebAssembly FFmpeg engine; the first use downloads about 33 MB of engine files. A modern browser and the site's cross-origin isolation headers are required.</p>
+        <p>Video files are limited to 100 MB and 10 minutes. Processing can be slow on mobile devices or low-memory computers. Keep the tab open until the download begins, and retain the source if the output matters.</p>
+        <p><a href="video.html">Open the video converter →</a></p>
+      </article>
+
+      <article id="documents">
+        <div class="eyebrow">04 · DOCUMENTS AND TABLES</div>
+        <h2>Know what a document conversion preserves.</h2>
+        <p>PDF is convenient for sharing a fixed page layout. DOCX is designed for editable word-processing content. When Fileflow converts PDFs and DOCX files, the current tools focus on extracting or rebuilding text; they are not a full desktop publishing engine. Fonts, page breaks, images, charts, footnotes, and complex layout may not carry over. Scanned PDFs contain page images rather than searchable text; Fileflow does not run OCR.</p>
+        <p>Spreadsheet conversions use the workbook's first worksheet. Formulas, styles, charts, workbook structure, and multiple sheets may not be preserved. CSV stores plain tabular values and does not carry formatting or multiple worksheets. Check the result before relying on it for a report or data workflow.</p>
+        <p>Document libraries are loaded from third-party CDNs when needed, so an internet connection is required for those conversions. The selected document is processed in the browser and is not uploaded to a Fileflow conversion server.</p>
+        <p><a href="document.html">Open the document converter →</a></p>
+      </article>
+
+      <article id="privacy">
+        <div class="eyebrow">05 · PRIVACY AND TROUBLESHOOTING</div>
+        <h2>Files are local; the website still uses network services.</h2>
+        <p>The selected file is processed in your browser rather than uploaded to a Fileflow conversion server. Pages and some conversion libraries are delivered by Vercel, Google Fonts, and script CDNs. Those services may receive ordinary connection information when your browser requests a resource. See the <a href="privacy.html">privacy notice</a> for details.</p>
+        <p>If a conversion fails, check that the input is supported, try a smaller or shorter file, close other memory-heavy tabs, and use an up-to-date browser. For video conversion, make sure the deployed page is open over HTTPS and reports cross-origin isolation. Do not send private files by email; a description of the file type, browser, and error message is usually enough for support.</p>
+      </article>
+    </section>
+    <section class="container"><div class="ad-slot ad-slot-bottom" role="complementary" aria-label="Reserved advertisement placement"><span class="ad-label">ADVERTISEMENT</span></div></section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">f</span><span>fileflow<span class="brand-dot">.</span></span></a>
+      <span>Simple tools for everyday files.</span>
+      <nav class="footer-nav" aria-label="Footer navigation"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="guides.html" aria-current="page">Guides</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="licenses.html">Licenses</a></nav>
+      <span>© 2026 Fileflow</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="description" content="Third-party software and license information for Fileflow.">
+  <title>Third-Party Software Notices — Fileflow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body data-page="licenses">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Fileflow home"><span class="brand-mark">f</span><span>fileflow<span class="brand-dot">.</span></span></a>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span></button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html#tools">All tools</a><a href="image.html">Image</a><a href="audio.html">Audio</a><a href="video.html">Video</a><a href="document.html">Documents</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <a class="header-cta" href="mailto:itzneverme154@gmail.com">Contact us <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main>
+    <section class="category-hero container">
+      <a class="back-link" href="index.html">← Back to Fileflow</a>
+      <div class="category-hero-content">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> OPEN-SOURCE SOFTWARE</div>
+        <h1>Built with<br><span>shared work.</span></h1>
+        <p>Fileflow uses third-party software. Its authors and licenses deserve clear attribution.</p>
+      </div>
+      <div class="category-hero-icon about-hero-icon" aria-hidden="true">©</div>
+    </section>
+    <section class="container detail-section legal-content">
+      <p class="legal-updated"><strong>Last reviewed:</strong> October 21, 2026</p>
+      <h2>Bundled video and audio engine</h2>
+      <p>Fileflow distributes <code>@ffmpeg/ffmpeg</code> version 0.12.10 (MIT) and <code>@ffmpeg/core-mt</code> version 0.12.10 (GPL-2.0-or-later), including its compiled WebAssembly core and worker. The core package is a multi-threaded FFmpeg WebAssembly build. Its GPL license applies to the distributed core; consult the package metadata and upstream project for the complete applicable notices and corresponding source.</p>
+      <ul>
+        <li><a href="https://www.npmjs.com/package/@ffmpeg/core-mt/v/0.12.10" rel="noopener noreferrer">@ffmpeg/core-mt version 0.12.10 package information</a></li>
+        <li><a href="https://github.com/ffmpegwasm/ffmpeg.wasm/tree/63ea4ccb6c58e127cc1767f88c508371936178c2" rel="noopener noreferrer">Upstream repository revision recorded in the published npm metadata (gitHead)</a></li>
+        <li><a href="https://github.com/ffmpegwasm/ffmpeg.wasm" rel="noopener noreferrer">FFmpeg.wasm upstream repository</a></li>
+        <li><a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html" rel="noopener noreferrer">GNU General Public License, version 2</a></li>
+        <li><a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noopener noreferrer">GNU General Public License, version 3</a></li>
+        <li><a href="https://www.ffmpeg.org/legal.html" rel="noopener noreferrer">FFmpeg legal considerations</a></li>
+      </ul>
+      <p><strong>Distribution review required:</strong> the npm package metadata identifies the core as GPL-2.0-or-later but does not include a license text or corresponding source files in the package payload copied by Fileflow's build. The package metadata records an upstream commit as <code>gitHead</code>; that link is a starting point, not confirmation that its source and build inputs exactly correspond to the distributed WebAssembly core. Before public commercial distribution or monetization, the site operator must verify the exact FFmpeg build's license and notices, provide the corresponding source and required written offer/notices as applicable, and assess whether the distribution and application are compatible with those terms. This page is a notice, not a determination that those obligations have been met.</p>
+
+      <h2>MIT notice for FFmpeg.wasm wrapper</h2>
+      <p>Copyright (c) 2019 Jerome Wu</p>
+      <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+      <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+      <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+
+      <h2>Browser conversion libraries</h2>
+      <p>Fileflow loads some conversion libraries from public CDNs when a corresponding tool is used. Their licenses and versions are controlled by their respective projects and distributions.</p>
+      <ul>
+        <li><a href="https://github.com/mwilliamson/mammoth.js" rel="noopener noreferrer">Mammoth.js</a> — DOCX text and HTML extraction.</li>
+        <li><a href="https://github.com/mozilla/pdf.js" rel="noopener noreferrer">PDF.js</a> — PDF text extraction.</li>
+        <li><a href="https://github.com/SheetJS/sheetjs" rel="noopener noreferrer">SheetJS Community Edition</a> — spreadsheet parsing and export.</li>
+        <li><a href="https://github.com/parallax/jsPDF" rel="noopener noreferrer">jsPDF</a> — PDF creation.</li>
+        <li><a href="https://github.com/dolanmiu/docx" rel="noopener noreferrer">docx</a> — DOCX creation.</li>
+        <li><a href="https://github.com/zhuker/lamejs" rel="noopener noreferrer">lamejs</a> — MP3 encoding.</li>
+        <li><a href="https://github.com/ffmpegwasm/ffmpeg.wasm" rel="noopener noreferrer">@ffmpeg/types</a> — TypeScript declarations (MIT).</li>
+      </ul>
+      <p>Version numbers and license terms can change when dependencies are updated. The source package manifests and upstream license files are authoritative for each distributed version.</p>
+      <p>Questions about these notices: <a href="mailto:itzneverme154@gmail.com">itzneverme154@gmail.com</a>.</p>
+    </section>
+    <section class="container"><div class="ad-slot ad-slot-bottom" role="complementary" aria-label="Reserved advertisement placement"><span class="ad-label">ADVERTISEMENT</span></div></section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">f</span><span>fileflow<span class="brand-dot">.</span></span></a>
+      <span>Simple tools for everyday files.</span>
+      <nav class="footer-nav" aria-label="Footer navigation"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="guides.html">Guides</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="licenses.html" aria-current="page">Licenses</a></nav>
+      <span>© 2026 Fileflow</span>
+    </div>
+  </footer>
+</body>
+</html>
